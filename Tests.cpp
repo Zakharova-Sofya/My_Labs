@@ -1,3 +1,9 @@
+#include<CircularBufer.h>
+#include<iostream>
+#include<cassert>
+
+using namespace std;
+
 void RunTests(){
     {
         CircularBuffer cb;
@@ -25,16 +31,16 @@ void RunTests(){
     {
         int capacity = 5;
         CircularBuffer cb(capacity);
-        cb.PushFront('A');
+        cb.CB::CircularBuffer::PushFront('A');
         assert(cb.Capacity() == capacity);
         assert(cb.Size() == 1);
         assert(cb[0] == 'A');
-        cb.PushFront('B');
+        cb.CB::CircularBuffer::PushFront('B');
         assert(cb.Capacity() == capacity);
         assert(cb.Size() == 2);
         assert(cb[0] == 'A');
         assert(cb[1] == 'B');
-        cb.PushBack('C');
+        cb.CB::CircularBuffer::PushBack('C');
         assert(cb[0] == 'C');
         assert(cb[1] == 'A');
         assert(cb[2] == 'B');
@@ -43,13 +49,13 @@ void RunTests(){
         int capacity = 5;
         char elem = 'A';
         CircularBuffer cb(capacity, elem);
-        cb.PopFront();
+        cb.CB::CircularBuffer::PopFront();
         assert(cb.Size() == capacity - 1);
         assert(cb[0] == 'A');
-        cb.PopBack();
+        cb.CB::CircularBuffer::PopBack();
         assert(cb.Size() == capacity - 2);
         assert(cb[cb.Size() - 1] == 'A');
-        cb.Clear();
+        cb.CB::CircularBuffer::Clear();
         assert(cb.Size() == 0);
     }
 
@@ -57,17 +63,17 @@ void RunTests(){
         int capacity = 5;
         char elem = 'A';
         CircularBuffer cb(capacity, elem);
-        cb.Insert(1, 'C');
+        cb.CB::CircularBuffer::Insert(1, 'C');
         assert(cb[1] == 'C');
         assert(cb.Size() == capacity);
-        cb.Erase(1, 3);
+        cb.CB::CircularBuffer::Erase(1, 3);
         assert(cb.Size() == 3);
         assert(cb[0] == 'A');
         assert(cb[1] == 'A');
         assert(cb[2] == 'A');
-        cb.PushBack('C');
+        cb.CB::CircularBuffer::PushBack('C');
         assert(cb[0] == 'C');
-        cb.Rotate(2);
+        cb.CB::CircularBuffer::Rotate(2);
         assert(cb[0] == 'A');
         assert(cb[1] == 'A');
         assert(cb[2] == 'C');
@@ -78,18 +84,16 @@ void RunTests(){
         int capacity = 5;
         char elem = 'A';
         CircularBuffer cb(capacity, elem);
-        cb.SetCapacity(capacity + 3);
+        cb.CB::CircularBuffer::SetCapacity(capacity + 3);
         assert(cb.Capacity() == capacity + 3);
-        cb.Resize(3);
+        cb.CB::CircularBuffer::Resize(3);
         assert(cb.Capacity() == capacity + 3);
         assert(cb.Size() == 3);
     }
 
 }
-
-int main() {
-    RunTests();
-    cout << "All tests passed";
-    
-    return 0;
+int main(){
+  RunTests();
+  cout << "All tests passed" << endl;
+  return 0;
 }
